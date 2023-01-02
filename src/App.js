@@ -26,26 +26,32 @@ function App() {
 
     <Container>
       <Row>
-        <Col>
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="80%"/>
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
-        <Col>
-          <img src="https://codingapple1.github.io/shop/shoes2.jpg" width="80%"/>
-          <h4>상품</h4>
-          <p>상품정보</p>
-        </Col>
-        <Col>
-          <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="80%" />
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
+
+        {
+          shoes.map(function(a, i) {
+            return (
+              <Col>
+                <Card shoes={shoes[i]} i={i+1}></Card>
+              </Col>
+            )
+          })  
+        }  
+        
       </Row> 
     </Container>
 
     </div>
   );
+}
+
+function Card(props) {
+  return (
+    <div className='model'>
+        <img src={'https://codingapple1.github.io/shop/shoes'+ props.i+'.jpg'} width="80%"/>
+          <h4>{props.shoes.title}</h4>
+          <p>{props.shoes.price}</p>
+     </div>
+  )
 }
 
 export default App;
