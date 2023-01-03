@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Navbar, Container, Nav, Col, Row } from 'react-bootstrap';
 import data from './data.js';
-
+import { Routes, Route, Link } from 'react-router-dom';
+import Detail from './Detail.js';
 
 function App() {
 
@@ -11,7 +12,6 @@ function App() {
 
   return (
     <div className="App">
-    
      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">JeffShop</Navbar.Brand>
@@ -21,28 +21,36 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
- 
-    <div className='main-bg'></div>
 
-    <Container>
-      <Row>
+      <Routes>
+        <Route path='/' element={
+          <div>
+            <div className='main-bg'></div>
 
-        {
-          shoes.map(function(a, i) {
-            return (
-              <Col>
-                <Card shoes={shoes[i]} i={i+1}></Card>
-              </Col>
-            )
-          })  
-        }  
-        
-      </Row> 
-    </Container>
+            <Container>
+              <Row>
 
+                {
+                  shoes.map(function(a, i) {
+                    return (
+                      <Col>
+                        <Card shoes={shoes[i]} i={i+1}></Card>
+                      </Col>
+                    )
+                  })  
+                }  
+                
+              </Row> 
+            </Container>            
+          </div>
+        } />
+        <Route path='/detail' element={ <Detail/> } />
+      </Routes>
     </div>
   );
 }
+
+
 
 function Card(props) {
   return (
