@@ -37,14 +37,14 @@ function App() {
                         <Card shoes={shoes[i]} i={i+1}></Card>
                       </Col>
                     )
-                  })  
-                }  
+                  })
+                }
                 
-              </Row> 
-            </Container>            
+              </Row>
+            </Container>
           </div>
         } />
-        <Route path='/detail' element={ <Detail/> } />
+        <Route path='/detail/:id' element={ <Detail shoes={shoes} />} />
       </Routes>
     </div>
   );
