@@ -11,7 +11,7 @@ function Detail(props) {
   // props.shoes = data
   var shoe;
   for(var i=0; i<props.shoes.length; i++) {
-    if(props.shoes[i].id == id) {
+    if(props.shoes[i].id === id) {
       shoe = props.shoes[i];
     }
   }
@@ -25,7 +25,7 @@ function Detail(props) {
 
     let [num, setnum] = useState('');
     useEffect(()=>{
-      if(isNaN(num) == true) {
+      if(isNaN(num)) {
         alert('그러지마세요')
       }
     }, [num])
@@ -34,7 +34,7 @@ function Detail(props) {
   return(
     <div className="container">
       {
-        alert1 == true
+        alert1 === true
         ?<div className="alert alert-warning">
           2초이내 구매시 할인
         </div>
