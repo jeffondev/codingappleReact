@@ -5,15 +5,11 @@ import { Navbar, Container, Nav, Col, Row } from 'react-bootstrap';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './Detail.js';
-import axios from 'axios';
 
 function App() {
 
-  let [shoes, setShoes] = useState(data);
+  let [shoes] = useState(data);
   let navigate = useNavigate();
-
-  let [counter, setCounter] = useState(0);
-
 
   return (
     <div className="App">
@@ -41,30 +37,11 @@ function App() {
                       <Col key={i}>
                         <Card shoes={shoes[i]} i={i+1}></Card>
                       </Col>
-                    )})} 
+                    )
+                  })
+                }
+                
               </Row>
-              { counter === 0 && (
-              <button onClick={()=>{ 
-                axios.get('https://codingapple1.github.io/shop/data'+ (counter+2) +'.json')
-                .then((결과)=>{ 
-                  console.log( 결과 )
-                  let copy = [...shoes, ...결과.data];
-                  setShoes(copy);
-                })
-                .catch(()=>{
-                  console.log( "실패함" )
-                })
-
-                //버튼 누르면 counter값 증가 바로 안됨
-                console.log(counter);
-                // let copy = [...counter];
-                // setCounter(copy + 1);
-                setCounter(counter+1);
-                // console.log(copy + 1);
-                console.log(counter);
-               }}>더 보기</button>
-              )}
-
             </Container>
           </div>
         } />
