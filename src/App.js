@@ -55,13 +55,11 @@ function App() {
                   console.log( "실패함" )
                 })
 
-                //버튼 누르면 counter값 증가 바로 안됨
-                console.log(counter);
-                // let copy = [...counter];
-                // setCounter(copy + 1);
                 setCounter(counter+1);
-                // console.log(copy + 1);
                 console.log(counter);
+
+                axios.post('/dkf', {name : 'jeffrey'})
+
                }}>더 보기</button>
               )}
 
