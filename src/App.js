@@ -6,6 +6,7 @@ import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './Detail.js';
 import axios from 'axios';
+import Cart from './Cart.js'
 
 function App() {
 
@@ -69,8 +70,13 @@ function App() {
         
         
         {/* {<Route path='/detail' element={ <Detail shoes={shoes} />} /> } */}
-        <Route path='/detail/:id?' element={ <Detail shoes={shoes} />} />
+        <Route path='/detail/:id?' element={
+            <Detail shoes={shoes} />
+           } />
+
         <Route path="*" element={ <div>없는 페이지 입니다.</div> } />
+
+        <Route path='/cart' element={<Cart/>}/>
       </Routes>
     </div>
   );
