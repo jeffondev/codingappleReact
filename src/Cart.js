@@ -26,7 +26,7 @@ function Cart(){
               <td>{state.cart[i].name}</td>
               <td>{state.cart[i].count}</td> 
               <td><button onClick={()=>{
-                dispatch(changecount(i))
+                dispatch(changecount(state.cart[i].id))
               }}>+</button></td>
             </tr>
             )

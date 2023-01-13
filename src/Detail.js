@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from 'react-bootstrap';
-
+import { addItem } from "./store";
+import { useDispatch } from "react-redux";
 
 function Detail(props) {
   let {id} = useParams();
@@ -11,6 +12,7 @@ function Detail(props) {
 
   let [탭, 탭변경] = useState(0);
 
+  let dispatch = useDispatch()
 
   // props.shoes = data
   var shoe;
@@ -26,14 +28,6 @@ function Detail(props) {
     useEffect(()=>{
       setTimeout(()=>{setalert1(false)}, 2000)
     }, [])
-
-    let [num, setnum] = useState('');
-    useEffect(()=>{
-      if(isNaN(num)) {
-        alert('그러지마세요')
-      }
-    }, [num])
-    
   
   return(
     <div className="container">
@@ -50,14 +44,17 @@ function Detail(props) {
           <img src={"https://codingapple1.github.io/shop/shoes" + (parseInt(id)+1) + ".jpg"} width="100%" />
         </div>
         <div className="col-md-6">
-          <input onChange={(e)=>{ setnum(e.target.value) }}/>
           <h4 className="pt-5">{shoe.title}</h4>
           <p>{shoe.content}</p>
           <p>{shoe.price}</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem( {id : shoe.id, name : shoe.title, count : 1} ))
+          }}>주문하기</button> 
         </div>
       </div>
       
+
+
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
           <Nav.Link onClick={()=> { 탭변경(0) }} eventKey="link0">버튼0</Nav.Link>
