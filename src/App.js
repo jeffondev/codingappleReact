@@ -15,6 +15,9 @@ function App() {
 
   let [counter, setCounter] = useState(0);
 
+  localStorage.setItem('데이터이름', '데이터');
+  localStorage.getItem('데이터이름');
+  localStorage.removeItem('데이터이름')
 
   return (
     <div className="App">
