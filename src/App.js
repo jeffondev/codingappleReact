@@ -7,6 +7,7 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './Detail.js';
 import axios from 'axios';
 import Cart from './Cart.js'
+import { useQuery } from "react-query"
 
 function App() {
 
@@ -14,6 +15,11 @@ function App() {
   let navigate = useNavigate();
 
   let [counter, setCounter] = useState(0);
+
+    let result = useQuery('작명', ()=>
+      axios.get('https://codingapple1.github.io/userdata.json')
+      .then((a)=>{ return a.data })
+    )
 
   localStorage.setItem('데이터이름', '데이터');
   localStorage.getItem('데이터이름');
@@ -29,6 +35,7 @@ function App() {
             <Nav.Link onClick={()=>{ navigate('/detail') }}>Detail</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/cart') }}>Cart</Nav.Link>
           </Nav>
+          <Nav className='ms-auto'>{ result.isLoading ? '로딩중' : result.data.name}</Nav>
         </Container>
       </Navbar>
 
@@ -44,7 +51,7 @@ function App() {
                   shoes.map(function(a, i) {
                     return (
                       <Col key={i}>
-                        <Card shoes={shoes[i]} i={i+1}></Card>
+                        <Card shoes={shoes[i]} i={i}></Card>
                       </Col>
                     )})} 
               </Row>
@@ -89,11 +96,15 @@ function App() {
 
 
 function Card(props) {
+  let navigate = useNavigate();
   return (
     <div className='model'>
-        <img src={'https://codingapple1.github.io/shop/shoes'+ props.i+'.jpg'} width="80%"/>
+        <img src={'https://codingapple1.github.io/shop/shoes'+ (props.i+1)+'.jpg'} width="80%" onClick={()=>{
+          navigate('/detail/' + props.i);
+        }}/>
           <h4>{props.shoes.title}</h4>
           <p>{props.shoes.price}</p>
+          
      </div>
   )
 }

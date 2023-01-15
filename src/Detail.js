@@ -17,11 +17,11 @@ function Detail(props) {
   // props.shoes = data
   var shoe;
   for(var i=0; i<props.shoes.length; i++) {
-    if(props.shoes[i].id === id) {
+    // console.log(props.shoes[i].id == id);
+    if(props.shoes[i].id == id) {
       shoe = props.shoes[i];
     }
   }
-
 
   let [alert1, setalert1] = useState(true);
 
