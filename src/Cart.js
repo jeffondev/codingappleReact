@@ -1,4 +1,4 @@
-import { useState, memo } from 'react'
+import { useState, memo, useTransition } from 'react'
 import {Table} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { changecount } from './store'
@@ -7,15 +7,30 @@ let Child = memo (function(){
   return <div>자식임</div>
 })
 
+let a = new Array(10000).fill(0)
+
 function Cart(){
 
   let state = useSelector((state)=> state)
   let dispatch = useDispatch()
   let [count,setCount] = useState(0);
 
+  let [name, setName] = useState('')
+  let [isPending, 늦게처리] = useTransition()
+
   return (
     
     <div>
+
+      <input onChange={(e)=>{
+        늦게처리(()=>{
+          setName(e.target.value)
+        })
+      }}/>
+
+     
+
+
       <Child count={count}></Child>
       <button onClick={()=>{ setCount(count+1) }}>+</button>
       <Table>
@@ -44,7 +59,7 @@ function Cart(){
 
           
         </tbody>
-    </Table> 
+      </Table> 
     </div>
   )
 }

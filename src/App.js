@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useTransition } from 'react';
 import { Navbar, Container, Nav, Col, Row } from 'react-bootstrap';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
@@ -9,6 +9,8 @@ import { useQuery } from "react-query"
 
 const Detail = lazy( () => import('./Detail.js') )
 const Cart = lazy( () => import('./Cart.js') )
+
+let a = new Array(10000).fill(0)
 
 function App() {
 
@@ -26,8 +28,30 @@ function App() {
   localStorage.getItem('데이터이름');
   localStorage.removeItem('데이터이름')
 
+  let [name, setName] = useState('')
+  let [isPending, 늦게처리] = useTransition()
+
   return (
+
+
     <div className="App">
+
+
+    <div>
+      <input onChange={ (e)=>{ 
+         늦게처리(()=>{
+          setName(e.target.value) 
+        })
+      }}/>
+
+      {
+        a.map(()=>{
+          // isPending ? "로딩중기다리셈" :
+          return <div>{name}</div>
+        })
+      }
+    </div>
+
      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">JeffShop</Navbar.Brand>
